@@ -6,11 +6,12 @@ import { Product } from '../model/Product';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ CommonModule, RouterOutlet, MatInputModule, MatButtonModule, MatCheckboxModule],
+  imports: [ CommonModule, RouterOutlet, MatInputModule, MatButtonModule, MatCheckboxModule, FormsModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
@@ -32,12 +33,9 @@ export class MainComponent implements OnInit
     this.list = this.service.getItems();
   }
 
-  markCheckbox(event: any, produto: string)
+  markCheckbox()
   {
-    this.list.forEach(it => {
-      if (it.produto == produto)
-        it.comprado = event.target.checked;
-    });
+
   }
 
   showComprados(event: any)
@@ -57,15 +55,6 @@ export class MainComponent implements OnInit
       .filter(it => it.produto != text)
     
       this.service.saveItens(this.list)
-  }
-
-  updateProduto(event: any)
-  {
-    this.savedText = event.target.value;
-  }
-  updateQtd(event: any)
-  {
-    this.savedQuantidade = event.target.value;
   }
   
   AddItem(){

@@ -2,14 +2,14 @@
 
     <p>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Produto" (input)="updateProduto($event)">
+            <input matInput placeholder="Produto" [(ngModel)]="savedText">
         </mat-form-field>
     
     </p>
 
     <p>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Quantidade" (input)="updateQtd($event)">
+            <input matInput placeholder="Quantidade" [(ngModel)]="savedQuantidade">
         </mat-form-field>
     </p>
     <button mat-fab extended color="primary" (click)="AddItem()">
@@ -19,18 +19,14 @@
 </div>
 <ul>
     <li>
-      <input type="checkbox" (change)="showComprados($event)"> Não mostrar itens já comprados.
+      <p><mat-checkbox [(ngModel)]="mostrarComprados">Não mostrar itens já comprados</mat-checkbox></p>
     </li>
     @for (item of list; track item.produto)
     {
         @if (!item.comprado || mostrarComprados)
         {
         <li>
-            <p><mat-checkbox formControlName="pepperoni" (change)="markCheckbox($event, item.produto)">{{item.produto}} - {{item.quantidade}}</mat-checkbox></p>
-<!-- 
-            <input type="checkbox" [checked]="item.comprado"
-            (change)="markCheckbox($event, item.produto)">
-            {{item.produto}} - {{item.quantidade}}  -->
+            <p><mat-checkbox [(ngModel)]="item.comprado">{{item.produto}} - {{item.quantidade}}</mat-checkbox></p>
             <button mat-button color="accent" (click)="editar(item.produto)">Editar</button>
             <button mat-button color="warn" (click)="RemoveItem(item.produto)">Excluir</button>
         </li>
